@@ -2,3 +2,5 @@
 .DS_Store
 build
 docbuild.xml
+.MathematicaResources
+Testing.nb
