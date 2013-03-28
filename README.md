@@ -13,3 +13,21 @@ A library for functions related to multiple view geometry in Mathematica.
 
 ## Documentation
 The application documentation will be integrated in the native Mathematica docs.
+
+## Available functions
+
+### Utilities
+<table>
+	<tr>
+		<th>Hgc[x]</th>
+		<td>converts a point to homogeneous coordinates by appending a 1.</td>
+	</tr>
+	<tr>
+		<th>Nc[x]</th>
+		<td>converts a point from non-infinite homogeneous to non-homogeneous coordinates.</td>
+	</tr>
+</table>
+
+### Homographies
+
+### Miscelaneous
