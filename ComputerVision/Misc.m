@@ -4,6 +4,9 @@ BeginPackage["ComputerVision`Misc`"]
 
 BressenhamPoints::usage = "BressenhamPoints[A,B] gives a list of the pixel-points on the line segment between A and B.";
 
+
+Begin["`Private`"] (* Begin Private Context *) 
+
 BressenhamPoints[A_, B_] := 
 	Module[{a, b, c, pixels, cp, d, i, p, q, slope, mirror, plusminus},
 		
@@ -60,10 +63,7 @@ BressenhamPoints[A_, B_] :=
 		(* Return the pixel coordinates *)
 		pixels
 	];
-
-
-Begin["`Private`"] (* Begin Private Context *) 
-
+	
 End[] (* End Private Context *)
 
 EndPackage[]
