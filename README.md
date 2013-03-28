@@ -19,11 +19,11 @@ The application documentation will be integrated in the native Mathematica docs.
 ### Utilities
 <table>
 	<tr>
-		<th>Hgc[x]</th>
+		<td>`Hgc[x]`</td>
 		<td>converts a point to homogeneous coordinates by appending a 1.</td>
 	</tr>
 	<tr>
-		<th>Nc[x]</th>
+		<td>`Nc[x]`</td>
 		<td>converts a point from non-infinite homogeneous to non-homogeneous coordinates.</td>
 	</tr>
 </table>
