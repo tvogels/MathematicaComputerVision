@@ -3,7 +3,7 @@
 BeginPackage["ComputerVision`",
 	{
 		"ComputerVision`HomogeneousCoordinates`",
-		"ComputerVision`Misc`"
+		"ComputerVision`Utils`"
 	}]
 
 

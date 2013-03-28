@@ -1,6 +1,6 @@
 (* Mathematica Package *)
 
-BeginPackage["ComputerVision`HomogeneousCoordinates`"]
+BeginPackage["ComputerVision`Utils`"]
 
 Hgc::usage = "Hgc[x] converts a list x representing a point in n-dimensional space 
   to homogeneous coordinates by appending a 1.";
