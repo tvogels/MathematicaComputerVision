@@ -12,6 +12,13 @@ NormalizePoints::usage = "Normalize[pts] normalizes a set of non-homogeneous or 
 	- their mean distance from the origin is sqrt(2)
 Returns the normalized set of points and the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)";
 
+
+NormalizePoints3D::usage = "Normalize3D[pts] normalizes a set of non-homogeneous or non-infinite homogeneous 3d points such that:
+	- their centroid is in the origin
+	- their mean distance from the origin is sqrt(3)
+Returns the normalized set of points and the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)";
+
+
 Begin["`Private`"] (* Begin Private Context *) 
 
 Homography2D[q1_List,q2_List] :=
@@ -64,6 +71,39 @@ NormalizePoints[points_List] :=
 		(* Return the values *)
 		{ps3, m}
 	];
+
+NormalizePoints3D[points_List] := 
+	Module[{mu, ps2, dist, ps3, m,npoints,columns,scale,pts},
+		{npoints,columns} = Dimensions[points];
+		
+		(* Use normal coordinates *)
+		If[columns==4,
+			pts = Nc/@points,
+			pts = points
+		];
+		
+		(* Make sure centroid is in origin *)
+		mu = N[Mean[pts]];
+		ps2 = (# - mu) & /@ pts;
+	
+		(* Make sure rms norm is Sqrt[3] *)
+		dist = N[RootMeanSquare[Norm /@ ps2]];
+		scale = Sqrt[3]/dist;
+		ps3 = scale ps2;
+	
+		(* What matrix does these actions? *)
+		m = {{scale,   0, 	  0,   -scale mu[[1]]},
+			 {  0, 	 scale,   0,   -scale mu[[2]]},
+			 {  0, 	   0, 	scale, -scale mu[[3]]},
+			 {  0,	   0,     0,         1       }};
+		
+		(* Output homogeneous points *)
+		ps3 = Hgc/@ps3;
+		
+		(* Return the values *)
+		{ps3, m}
+	];
+
 
 End[] (* End Private Context *)
 

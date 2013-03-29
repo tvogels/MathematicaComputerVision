@@ -14,10 +14,11 @@ Intersect::usage = "Intersect[l,m] returns the intersection the homogeneous 2d l
 LineThrough::usage = "LineThrough[p,q] returns the line joining the homogeneous 2d points p and q.";
 
 LineRep::usage = "LineRep[l] represents a homogeneous line {a,b,c} as a x + b y + c ==0
-for use in functions like ContourPlot";
+for use in functions like ContourPlot.";
 
 LineDirection::usage = "LineDirection[l] returns the direction of the line l.";
 
+RQ::usage = "Variant of the QR Decomposition such that A=R.Q, and R is upper triangular and Q orthogonal.";
 
 Begin["`Private`"] (* Begin Private Context *) 
 
@@ -47,6 +48,16 @@ LineDirection[l_] :=
 	If[l[[2]]==0,
 		ArcTan[ComplexInfinity],
 		ArcTan[-l[[1]]/l[[2]]]
+	];
+
+RQ[A_] := 
+	Module[{m, n, rA, q, r},
+		{m, n} = Dimensions[A];
+		rA = Reverse[A];
+		{q, r} = N[QRDecomposition[rA\[Transpose]]];
+		r = Reverse[Reverse[r\[Transpose]]\[Transpose]]\[Transpose];
+		q = Reverse[q];
+		{r, q}
 	];
 
 End[] (* End Private Context *)

@@ -4,7 +4,8 @@ BeginPackage["ComputerVision`",
 	{
 		"ComputerVision`Utils`",
 		"ComputerVision`Misc`",
-		"ComputerVision`Homographies`"
+		"ComputerVision`Homographies`",
+		"ComputerVision`Camera`"
 	}]
 
 

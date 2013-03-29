@@ -58,6 +58,13 @@ for use in functions like ContourPlot.</td>
 Returns the normalized set of points <b>and</b> the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)</td>
 	</tr>
 	<tr>
+		<td><code>NormalizePoints3D[pts]</code></td>
+		<td>normalizes a set of non-homogeneous or non-infinite homogeneous 3d points such that:
+* their centroid is in the origin
+* their mean distance from the origin is sqrt(3)
+Returns the normalized set of points <b>and</b> the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)</td>
+	</tr>
+	<tr>
 		<td><code>Homography2D[x,y]</code></td>
 		<td>calculates a homography between two sets of homogeneous 2D points x and y using the Direct Linear Transformation algorithm (Hartley&amp;Zisserman, p.89). For optimal results the Gold Standard algorithm should be used.</td>
 	</tr>
