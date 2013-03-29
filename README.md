@@ -19,12 +19,15 @@ The application documentation will be integrated in the native Mathematica docs.
 ### Utilities
 <table>
 	<tr>
-		<td>`Hgc[x]`</td>
-		<td>converts a point to homogeneous coordinates by appending a 1.</td>
+		<td><code>Hgc[x]</code></td>
+		<td>converts a list x representing a point in n-dimensional space 
+  to homogeneous coordinates by appending a 1.</td>
 	</tr>
 	<tr>
-		<td>`Nc[x]`</td>
-		<td>converts a point from non-infinite homogeneous to non-homogeneous coordinates.</td>
+		<td><code>Nc[x]</code></td>
+		<td>converts a list x representing a point in homogeneous coordinates
+  to non-homogeneous coordinates by stripping the last element and dividing by it.
+If the point lies on infintiy, a warning is thrown.</td>
 	</tr>
 </table>
 
