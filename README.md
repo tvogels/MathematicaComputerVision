@@ -49,5 +49,48 @@ for use in functions like ContourPlot.</td>
 </table>
 
 ### Homographies
+<table>
+	<tr>
+		<td><code>NormalizePoints[pts]</code></td>
+		<td>normalizes a set of non-homogeneous or non-infinite homogeneous 2d points such that:
+* their centroid is in the origin
+* their mean distance from the origin is sqrt(2)
+Returns the normalized set of points <b>and</b> the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)</td>
+	</tr>
+	<tr>
+		<td><code>Homography2D[x,y]</code></td>
+		<td>calculates a homography between two sets of homogeneous 2D points x and y using the Direct Linear Transformation algorithm (Hartley&amp;Zisserman, p.89). For optimal results the Gold Standard algorithm should be used.</td>
+	</tr>
+</table>
+
+### Image Manipulation
+<table>
+	<tr>
+		<td><code>ImageCoordinateToDataPoint[p,img]</code></td>
+		<td>converts image coordinates (origin left-bottom) to a corresponding data point (origin left-top)</td>
+	</tr>
+	<tr>
+		<td><code>ImageColorAtCoordinate[p,img]</code></td>
+		<td>returns the color at coordinate p (origin left-bottom)</td>
+	</tr>
+	<tr>
+		<td><code>LinePointsInImage[l,img]</code></td>
+		<td>gives the two extreme points on an image of a homogeneous line (snapped to pixel-positions)<br>
+NOT TESTED for lines that lie completely outside the image</td>
+	</tr>
+	<tr>
+		<td><code>LineInImage[l,img]</code></td>
+		<td>takes the points from LinePointsInImage and makes it a Graphics primitive.</td>
+	</tr>
+</table>
 
 ### Miscelaneous
+<table>
+	<tr>
+		<td><code>BressenhamPoints[A,B]</code></td>
+		<td>gives a list of the pixel-points on the line segment between A and B.</td>
+	</tr>
+</table>
+
+
+
