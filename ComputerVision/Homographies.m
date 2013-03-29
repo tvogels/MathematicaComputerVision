@@ -7,7 +7,7 @@ Homography2D::usage = "Homography2D[x,y] calculates a homography between two set
 For optimal results the Gold Standard algorithm should be used.";
 
 
-NormalizePoints::usage = "Normalize[pts_] a set of non-homogeneous or non-infinite homogeneous 2d points such that:
+NormalizePoints::usage = "Normalize[pts] normalizes a set of non-homogeneous or non-infinite homogeneous 2d points such that:
 	- their centroid is in the origin
 	- their mean distance from the origin is sqrt(2)
 Returns the normalized set of points and the transformation that transforms a set of homogeneous points to the normalized ones (for denormalization purposes)";
