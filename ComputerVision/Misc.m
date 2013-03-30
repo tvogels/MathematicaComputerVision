@@ -1,6 +1,6 @@
 (* Mathematica Package *)
 
-BeginPackage["ComputerVision`Misc`"]
+BeginPackage["ComputerVision`Misc`",{"ComputerVision`Utils`"}]
 
 BressenhamPoints::usage = "BressenhamPoints[A,B] gives a list of the pixel-points on the line segment between A and B.";
 
@@ -25,7 +25,7 @@ BressenhamPoints[A_, B_] :=
 		];
 
 		(* Find the line as b y - a x - c = 0 *)
-		{a, b, c} = {-1, 1, -1}*lineThrough[hgc[p],hgc[q]];
+		{a, b, c} = {-1, 1, -1}*LineThrough[Hgc[p],Hgc[q]];
 
 		(* If the slope is larger than one, swap x and y *)
 		(* Replace infinity by a big number, to avoid errors *)

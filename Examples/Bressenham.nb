@@ -1,0 +1,120 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3545,        111]
+NotebookOptionsPosition[      3117,         91]
+NotebookOutlinePosition[      3474,        107]
+CellTagsIndexPosition[      3431,        104]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Bressenham\[CloseCurlyQuote]s Algorithm", "Title",
+ CellChangeTimes->{{3.57287748639106*^9, 3.5728774894354143`*^9}}],
+
+Cell["Thijs Vogels - March 2013", "Subtitle",
+ CellChangeTimes->{{3.572877571413601*^9, 3.572877573739293*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"<<", "ComputerVision`Misc`"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.572877492633919*^9, 3.572877502035977*^9}, {
+   3.572890394799603*^9, 3.5728904266798277`*^9}, {3.5728904654927473`*^9, 
+   3.572890466661274*^9}, 3.572890579505269*^9, {3.573628456486876*^9, 
+   3.573628459405031*^9}, 3.5736285032039347`*^9, {3.5736285341842613`*^9, 
+   3.5736285347587967`*^9}, {3.573628580773356*^9, 3.573628584674844*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"p1", "=", 
+     RowBox[{"Round", "[", "p1", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"p2", "=", 
+     RowBox[{"Round", "[", "p2", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"Gray", ",", 
+        RowBox[{"PointSize", "[", ".02", "]"}], ",", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{"p1", ",", "p2"}], "}"}], "]"}], ",", "\[IndentingNewLine]",
+         "Orange", ",", 
+        RowBox[{"Point", "/@", 
+         RowBox[{"BressenhamPoints", "[", 
+          RowBox[{"p1", ",", "p2"}], "]"}]}]}], "\[IndentingNewLine]", "}"}], 
+      ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "18"}], ",", "10"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "18"}], ",", "10"}], "}"}]}], "}"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p1", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "4"}], ",", 
+         RowBox[{"-", "4"}]}], "}"}]}], "}"}], ",", "Locator"}], "}"}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p2", ",", 
+       RowBox[{"{", 
+        RowBox[{"4", ",", "4"}], "}"}]}], "}"}], ",", "Locator"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.572877505719811*^9, 3.5728775076597557`*^9}, {
+  3.5728775450819798`*^9, 3.572877546591868*^9}, {3.572890620978156*^9, 
+  3.572890716514669*^9}, {3.57362846187988*^9, 3.573628486165635*^9}, {
+  3.573628593855276*^9, 3.573628595485063*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 685},
+WindowMargins->{{350, Automatic}, {Automatic, 50}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 123, 1, 93, "Title"],
+Cell[705, 25, 111, 1, 52, "Subtitle"],
+Cell[819, 28, 475, 8, 28, "Input",
+ InitializationCell->True],
+Cell[1297, 38, 1804, 50, 165, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
