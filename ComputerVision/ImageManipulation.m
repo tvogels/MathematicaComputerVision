@@ -13,7 +13,7 @@ LineInImage::usage = "LineInImage[l,img] takes the points from LinePointsInImage
 
 Begin["`Private`"] (* Begin Private Context *) 
 
-ImageCoordinateToDataPoint[{x_, y_}, img] :=
+ImageCoordinateToDataPoint[{x_, y_}, img_] :=
 	Module[{w,h},
 		{w,h}=ImageDimensions[img];
 		Round[{h + .5 - y, x + .5}]

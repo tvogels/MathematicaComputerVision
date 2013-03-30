@@ -20,6 +20,8 @@ LineDirection::usage = "LineDirection[l] returns the direction of the line l.";
 
 RQ::usage = "Variant of the QR Decomposition such that A=R.Q, and R is upper triangular and Q orthogonal.";
 
+Rxyz::usage = "Rxyz[a,b,c] gives a 3x3 rotation matrix that first translates a in the x-direction, then b in the y direction and c in the z-direction.";
+
 Begin["`Private`"] (* Begin Private Context *) 
 
 Hgc[x_List] := 
@@ -59,6 +61,28 @@ RQ[A_] :=
 		q = Reverse[q];
 		{r, q}
 	];
+
+Rx[a_] := ( {
+    {1, 0, 0},
+    {0, Cos[a], -Sin[a]},
+    {0, Sin[a], Cos[a]}
+   } );
+Ry[b_] := ( {
+    {Cos[b], 0, Sin[b]},
+    {0, 1, 0},
+    {-Sin[b], 0, Cos[b]}
+   } );
+Rz[c_] := ( {
+    {Cos[c], -Sin[c], 0},
+    {Sin[c], Cos[c], 0},
+    {0, 0, 1}
+   } );
+Rxyz[a_, b_, c_] := Rz[c].Ry[b].Rx[a];
+DecomposeRotation[R_] := {
+   ArcTan[R[[3, 3]], R[[3, 2]]],
+   -ArcSin[R[[3, 1]]],
+   ArcTan[R[[1, 1]], R[[2, 1]]]
+   };
 
 End[] (* End Private Context *)
 

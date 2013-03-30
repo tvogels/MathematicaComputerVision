@@ -6,7 +6,9 @@ CameraMatrixFromCorrespondences::usage = "CameraMatrixFromCorrespondences[corr] 
 
 CameraDecompose::usage = "DecomposeCamera[P] decomposes the camera into {K,R,t} such that P = K.R.[I | -t].";
 
-DrawCamera::usage = "DrawCamera[P,img] gives a 3D object showing the camera orientation. To be used inside a Graphics3D environment. It uses the img for its dimensions.";
+DrawCamera::usage = "DrawCamera[P] gives a 3D object showing the camera orientation. To be used inside a Graphics3D environment. It uses the img for its dimensions.
+DrawCamera[P,size] does the same with a given size.
+DrawCamera[P,size,img] let's you specify an image used to find correct the width and height of the screen.";
 
 Begin["`Private`"] (* Begin Private Context *) 
 
@@ -32,21 +34,30 @@ CameraMatrixFromCorrespondences[corr_] :=
 	];
 
 CameraDecompose[P_] :=
-	Module[{H,K,R,t},
+	Module[{H,K,R,t,D},
 		(* Define H as the first three columns of P. *)
 		H = P[[All,Range[1,3]]];
 		(* K and R follow from an RQ decomposition. *)
 		{K,R} = RQ[H];
 		(* Make sure K[[3,3]] is 1. *)
 		K = K/K[[3,3]];
+		(* Make sure the f-components of K are positive, if not,
+			change K and R *)
+		If[K[[1,1]]<0,
+			D = DiagonalMatrix[{-1,-1,1}];
+			K = K.D;
+			R = D.R;
+		];
 		(* Calculate t. *)
 		t = NullSpace[P][[1]];
 		(* Return values found. *)
 		{K,R,t}
 	];
-
-DrawCamera[P_,img_] :=
-	Module[{K,R,t,f,Rinv,size,pts,w,h,px,py},
+	
+DrawCamera[P_] := DrawCamera[P,1];
+DrawCamera[P_,size_] := DrawCamera[P,size,Null];
+DrawCamera[P_,s_,img_] :=
+	Module[{K,R,t,f,Rinv,pts,w,h,px,py,size,det},
 		(* Decompose the camera to get all parameters. *)
 		{K,R,t} = CameraDecompose[P];
 		(* Take the average value for f. *)
@@ -56,20 +67,25 @@ DrawCamera[P_,img_] :=
 		(* Calculate the inverse rotation matrix. *)
 		Rinv = Inverse[R];
 		(* The displayed principal point distance is 1 x the sign of f. *)
-		size = Sign[f];
+		size = s;
 		(* Other values *)
-		{w,h} = ImageDimensions[img];
 		px = K[[1,3]];
 		py = K[[2,3]];
+		If[ img === Null,
+			{w,h} = 2{px,py},
+			{w,h} = ImageDimensions[img]
+		];
+		(* The determinant of M is used to determine axis direction *)
+		det = Det[P[[All,Range[1,3]]]];
 		(* Define the points and transform them. *)
-		pts = size/f {
+		pts = size {
 			{0, 0, 0},
-			{-px, -py, -f},
-			{-px, h - py, -f},
-			{w - px, h - py, -f},
-			{w - px, -py, -f},
-			{f, 0, 0},
-			{0, f, 0}
+			{(-px)/f, (-py)/f, 1},
+			{(-px)/f, (h - py)/f, 1},
+			{(w - px)/f, (h - py)/f, 1},
+			{(w - px)/f, (-py)/f, 1},
+			{Sign[det], 0, 0},
+			{0, Sign[det], 0}
 		};
 		pts = (Rinv.# + t) & /@ pts;
 		(* Return the graphics primitives. *)

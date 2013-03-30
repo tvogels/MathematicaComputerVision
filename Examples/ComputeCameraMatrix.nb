@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    286483,       4878]
-NotebookOptionsPosition[    284952,       4821]
-NotebookOutlinePosition[    285326,       4838]
-CellTagsIndexPosition[    285283,       4835]
+NotebookDataLength[    293293,       5055]
+NotebookOptionsPosition[    291292,       4984]
+NotebookOutlinePosition[    291669,       5001]
+CellTagsIndexPosition[    291626,       4998]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -28,6 +28,11 @@ From pixel-point correspondences
 Thijs Vogels - Februari 2013\
 \>", "Subtitle",
  CellChangeTimes->{{3.5735480582565527`*^9, 3.573548090863586*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "ComputerVision`"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.573621639118615*^9, 3.573621641196352*^9}}],
 
 Cell[CellGroupData[{
 
@@ -4667,7 +4672,7 @@ Cell[BoxData[
            RowBox[{"Graphics3D", "[", 
             RowBox[{"{", 
              RowBox[{"Red", ",", 
-              RowBox[{"PointSize", "[", "Large", "]"}], ",", 
+              RowBox[{"PointSize", "[", ".1", "]"}], ",", 
               RowBox[{"Point", "[", "ActivePoint", "]"}]}], "}"}], "]"}]}], 
           "]"}]}], "\[IndentingNewLine]", ",", 
         RowBox[{"{", 
@@ -4703,7 +4708,8 @@ Cell[BoxData[
   "TableForm"}]], "Input",
  CellChangeTimes->{{3.5735485419074*^9, 3.57354857798211*^9}, {
   3.573548694779351*^9, 3.573548702534669*^9}, {3.573548786233139*^9, 
-  3.573548801727619*^9}, {3.5735562788275757`*^9, 3.573556284409438*^9}}],
+  3.573548801727619*^9}, {3.5735562788275757`*^9, 3.573556284409438*^9}, {
+  3.57362492866879*^9, 3.5736249412375183`*^9}}],
 
 Cell[CellGroupData[{
 
@@ -4801,26 +4807,183 @@ Cell[BoxData[
     RowBox[{"K", ",", "R", ",", "t"}], "}"}], "=", 
    RowBox[{"CameraDecompose", "[", "P", "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.573568624149878*^9, 3.573568658613728*^9}, 
-   3.573575058968788*^9}],
+   3.573575058968788*^9, {3.573623152987212*^9, 3.5736231632736683`*^9}, {
+   3.573623238652891*^9, 3.573623253864622*^9}}],
 
 Cell[BoxData[
  RowBox[{"Show", "[", "\[IndentingNewLine]", 
   RowBox[{"CubeImage", ",", "\[IndentingNewLine]", 
    RowBox[{"Graphics3D", "[", 
     RowBox[{"DrawCamera", "[", 
-     RowBox[{"P", ",", "Cube"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input",
+     RowBox[{"P", ",", "1.5", ",", "Cube"}], "]"}], "]"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
  CellChangeTimes->{{3.573573862459196*^9, 3.573573872984304*^9}, {
-   3.573574499912265*^9, 3.573574537370288*^9}, 3.5735750589692373`*^9}]
+   3.573574499912265*^9, 3.573574537370288*^9}, 3.5735750589692373`*^9, {
+   3.5736222106604223`*^9, 3.573622240423163*^9}, {3.573622450393545*^9, 
+   3.573622461335771*^9}, {3.573622560080205*^9, 3.5736225854092216`*^9}, {
+   3.573622617900284*^9, 3.5736226186085987`*^9}, {3.573622719570365*^9, 
+   3.573622806395405*^9}, 3.573623125075119*^9, {3.573623168897683*^9, 
+   3.5736231750404387`*^9}, 3.573623274855481*^9}]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
 Cell["Calculate the vanishing points", "Subsection",
- CellChangeTimes->{{3.573574920463285*^9, 3.573574938962569*^9}}]
+ CellChangeTimes->{{3.573574920463285*^9, 3.573574938962569*^9}}],
+
+Cell["\<\
+Vanishing points are represented by the first 3 columns of P.\
+\>", "Text",
+ CellChangeTimes->{{3.573623288631548*^9, 3.573623302642805*^9}}],
+
+Cell[BoxData[
+ RowBox[{"VanishingPoints", "=", 
+  RowBox[{"Nc", "/@", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"P", "\[Transpose]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"Range", "[", 
+       RowBox[{"1", ",", "3"}], "]"}], "]"}], "]"}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.5736237390439167`*^9, 3.573623794471909*^9}}],
+
+Cell[TextData[{
+ "For drawing the lines, use the CartesianProduct function from the ",
+ StyleBox["Combinatorica",
+  FontSlant->"Italic"],
+ " extension."
+}], "Text",
+ CellChangeTimes->{{3.573625130393778*^9, 3.573625143492551*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "Combinatorica`"}]], "Input",
+ CellChangeTimes->{{3.573624619434444*^9, 3.573624621812603*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", "\[IndentingNewLine]", 
+  RowBox[{"Cube", ",", "\[IndentingNewLine]", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"PointSize", "[", "Medium", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Point", "/@", "VanishingPoints"}], ",", "\[IndentingNewLine]", 
+      "Thin", ",", "\[IndentingNewLine]", 
+      RowBox[{"Line", "/@", 
+       RowBox[{"CartesianProduct", "[", 
+        RowBox[{"VanishingPoints", ",", 
+         RowBox[{"Correspondences", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "]"}]}]}], 
+     "\[IndentingNewLine]", "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.573623830968789*^9, 3.5736238442048492`*^9}, 
+   3.573624014239476*^9, {3.573624157172214*^9, 3.573624168810133*^9}, {
+   3.5736242017453938`*^9, 3.573624251501101*^9}, {3.573624312057659*^9, 
+   3.5736243144550467`*^9}, {3.573624364447768*^9, 3.573624389583294*^9}, {
+   3.5736246658081007`*^9, 3.573624717015663*^9}, {3.573625495830406*^9, 
+   3.573625496641446*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate the picture", "Subsection",
+ CellChangeTimes->{{3.573625705468649*^9, 3.5736257079362793`*^9}}],
+
+Cell["\<\
+As long as the camera centre stays the same, we can do whatever we want with \
+the picture.\
+\>", "Text",
+ CellChangeTimes->{{3.57362571033014*^9, 3.573625721903523*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "Trans", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Trans", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", GridBox[{
+             {"scale", "1", "1"},
+             {"1", "scale", "1"},
+             {"1", "1", "1"}
+            }], ")"}], "K"}], ")"}], ".", 
+        RowBox[{"Rxyz", "[", 
+         RowBox[{
+          RowBox[{"\[Alpha]", " ", "Degree"}], ",", 
+          RowBox[{"\[Beta]", " ", "Degree"}], ",", 
+          RowBox[{"\[Gamma]", " ", "Degree"}]}], "]"}], ".", 
+        RowBox[{"Inverse", "[", "K", "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GraphicsGrid", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "ImagePerspectiveTransformation", "[", "\[IndentingNewLine]", 
+            RowBox[{
+            "Cube", ",", "\[IndentingNewLine]", "Trans", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"DataRange", "\[Rule]", "Full"}], ",", 
+             RowBox[{"Padding", "\[Rule]", "White"}]}], "\[IndentingNewLine]",
+             "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Show", "[", "\[IndentingNewLine]", 
+            RowBox[{"CubeImage", ",", "\[IndentingNewLine]", 
+             RowBox[{"Graphics3D", "[", 
+              RowBox[{"DrawCamera", "[", 
+               RowBox[{
+                RowBox[{"Trans", ".", "P"}], ",", "1.5", ",", "Cube"}], "]"}],
+               "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"PlotRange", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "5"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "4"}], ",", "1"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "5"}], "}"}]}], "}"}]}]}], 
+            "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], 
+         "}"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Alpha]", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "180"}], ",", "180"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "180"}], ",", "180"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "180"}], ",", "180"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"scale", ",", "1"}], "}"}], ",", "0", ",", "2"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.5736261542876043`*^9, 3.573626177691512*^9}, {
+  3.573626221047793*^9, 3.573626295412595*^9}, {3.573626434726647*^9, 
+  3.573626447076626*^9}, {3.573626487796556*^9, 3.573626561468829*^9}, {
+  3.573626631991419*^9, 3.5736267573328543`*^9}, {3.573627369869701*^9, 
+  3.573627413510652*^9}, {3.573627487528569*^9, 3.5736275151970053`*^9}, {
+  3.5736278457843122`*^9, 3.573627848556245*^9}}]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{720, 785},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{953, 748},
+WindowMargins->{{Automatic, -10}, {Automatic, 13}},
 ShowCellTags->True,
 FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
 2013)",
@@ -4840,44 +5003,58 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 108, 1, 93, "Title"],
 Cell[690, 25, 157, 4, 83, "Subtitle"],
-Cell[CellGroupData[{
-Cell[872, 33, 136, 3, 81, "Section"],
-Cell[CellGroupData[{
-Cell[1033, 40, 95, 1, 45, "Subsection"],
-Cell[1131, 43, 273571, 4491, 107, "Input",
- InitializationCell->True]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[274739, 4539, 93, 1, 45, "Subsection"],
-Cell[274835, 4542, 2847, 75, 182, "Input",
- InitializationCell->True]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[277731, 4623, 227, 7, 81, "Section"],
-Cell[277961, 4632, 344, 9, 28, "Input",
+Cell[850, 31, 152, 3, 28, "Input",
  InitializationCell->True],
-Cell[278308, 4643, 2676, 62, 386, "Input"],
 Cell[CellGroupData[{
-Cell[281009, 4709, 112, 1, 45, "Subsection"],
-Cell[281124, 4712, 1039, 25, 131, "Input",
+Cell[1027, 38, 136, 3, 81, "Section"],
+Cell[CellGroupData[{
+Cell[1188, 45, 95, 1, 45, "Subsection"],
+Cell[1286, 48, 273571, 4491, 107, "Input",
  InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[282200, 4742, 98, 1, 45, "Subsection"],
-Cell[282301, 4745, 340, 8, 28, "Input"],
-Cell[282644, 4755, 447, 10, 46, "Input"]
+Cell[274894, 4544, 93, 1, 45, "Subsection"],
+Cell[274990, 4547, 2847, 75, 148, "Input",
+ InitializationCell->True]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[283140, 4771, 106, 1, 81, "Section"],
-Cell[283249, 4774, 655, 12, 46, "Input"],
+Cell[277886, 4628, 227, 7, 81, "Section"],
+Cell[278116, 4637, 344, 9, 28, "Input",
+ InitializationCell->True],
+Cell[278463, 4648, 2723, 63, 369, "Input"],
 Cell[CellGroupData[{
-Cell[283929, 4790, 189, 4, 71, "Subsection"],
-Cell[284121, 4796, 261, 7, 28, "Input"],
-Cell[284385, 4805, 406, 8, 80, "Input"]
+Cell[281211, 4715, 112, 1, 45, "Subsection"],
+Cell[281326, 4718, 1039, 25, 131, "Input",
+ InitializationCell->True]
 }, Open  ]],
-Cell[284806, 4816, 118, 1, 45, "Subsection"]
+Cell[CellGroupData[{
+Cell[282402, 4748, 98, 1, 45, "Subsection"],
+Cell[282503, 4751, 340, 8, 28, "Input"],
+Cell[282846, 4761, 447, 10, 46, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[283342, 4777, 106, 1, 81, "Section"],
+Cell[283451, 4780, 655, 12, 46, "Input"],
+Cell[CellGroupData[{
+Cell[284131, 4796, 189, 4, 45, "Subsection"],
+Cell[284323, 4802, 359, 8, 28, "Input"],
+Cell[284685, 4812, 766, 13, 80, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[285488, 4830, 118, 1, 45, "Subsection"],
+Cell[285609, 4833, 151, 3, 31, "Text"],
+Cell[285763, 4838, 332, 9, 30, "Input"],
+Cell[286098, 4849, 230, 6, 31, "Text"],
+Cell[286331, 4857, 124, 2, 28, "Input"],
+Cell[286458, 4861, 1162, 23, 165, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[287657, 4889, 112, 1, 45, "Subsection"],
+Cell[287772, 4892, 180, 4, 31, "Text"],
+Cell[287955, 4898, 3297, 81, 391, "Input"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }
