@@ -38,13 +38,16 @@ If the point lies on infintiy, a warning is thrown.</td>
 		<td>returns the line joining the homogeneous 2d points p and q.</td>
 	</tr>
 	<tr>
-		<td><code>LineRep[l]</code></td>
-		<td>represents a homogeneous line {a,b,c} as a x + b y + c ==0
-for use in functions like ContourPlot.</td>
-	</tr>
-	<tr>
 		<td><code>LineDirection[l]</code></td>
 		<td>returns the direction of the line l.</td>
+	</tr>
+	<tr>
+		<td><code>RQ[M]</code></td>
+		<td>is a variant of the QR Decomposition such that A=R.Q, and R is upper triangular and Q orthogonal.</td>
+	</tr>
+	<tr>
+		<td><code>Rxyz[α,β,γ]</code></td>
+		<td>gives a 3x3 rotation matrix that first translates a in the x-direction, then b in the y direction and c in the z-direction.</td>
 	</tr>
 </table>
 
@@ -70,6 +73,24 @@ Returns the normalized set of points <b>and</b> the transformation that transfor
 	</tr>
 </table>
 
+### Camera Matrix
+<table>
+	<tr>
+		<td><code>CameraMatrixFromCorrespondences[corr]</code></td>
+		<td>gives the camera matrix for >=6 {world,pixel} correspondences (homogeneous coordinates) using a DLT method.</td>
+	</tr>
+	<tr>
+		<td><code>DecomposeCamera[P]</code></td>
+		<td>decomposes the camera into {K,R,t} such that P = K.R.[I | -t].</td>
+	</tr>
+	<tr>
+		<td><code>DrawCamera[P]</code></td>
+		<td>gives a 3D object showing the camera orientation. To be used inside a Graphics3D environment. It uses the img for its dimensions.
+<code>DrawCamera[P,size]</code> does the same with a given size.
+<code>DrawCamera[P,size,img]</code> let's you specify an image used to find correct the width and height of the screen.</td>
+	</tr>
+</table>
+
 ### Image Manipulation
 <table>
 	<tr>
@@ -88,6 +109,34 @@ NOT TESTED for lines that lie completely outside the image</td>
 	<tr>
 		<td><code>LineInImage[l,img]</code></td>
 		<td>takes the points from LinePointsInImage and makes it a Graphics primitive.</td>
+	</tr>
+</table>
+
+### Least squares fitting
+<table>
+	<tr>
+		<td><code>FitConic[points]</code></td>
+		<td>fits a conic through at least 5 homogeneous points using linear minimization.</td>
+	</tr>
+	<tr>
+		<td><code>FitLine[points]</code></td>
+		<td>gives a least squares fit of a line to a set of points.</td>
+	</tr>
+</table>
+
+### RANSAC
+<table>
+	<tr>
+		<td><code>RANSAC[x, fittingfn, distfn, degenfn, s, t, feedback, maxDataTrials, maxTrials]</td>
+		<td>is a general RANSAC implementation. The last three arguments are optional.</td>
+	</tr>
+</table>
+
+### File System
+<table>
+	<tr>
+		<td><code>LoadImagesInDirectory[dir]</code></td>
+		<td>returns all images in a directory.</td>
 	</tr>
 </table>
 

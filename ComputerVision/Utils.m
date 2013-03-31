@@ -13,12 +13,9 @@ Intersect::usage = "Intersect[l,m] returns the intersection the homogeneous 2d l
 
 LineThrough::usage = "LineThrough[p,q] returns the line joining the homogeneous 2d points p and q.";
 
-LineRep::usage = "LineRep[l] represents a homogeneous line {a,b,c} as a x + b y + c ==0
-for use in functions like ContourPlot.";
-
 LineDirection::usage = "LineDirection[l] returns the direction of the line l.";
 
-RQ::usage = "Variant of the QR Decomposition such that A=R.Q, and R is upper triangular and Q orthogonal.";
+RQ::usage = "RQ[A] is a variant of the QR Decomposition such that A=R.Q, and R is upper triangular and Q orthogonal.";
 
 Rxyz::usage = "Rxyz[a,b,c] gives a 3x3 rotation matrix that first translates a in the x-direction, then b in the y direction and c in the z-direction.";
 
@@ -42,9 +39,6 @@ Intersect[l_List,m_List] :=
 
 LineThrough[p_,q_] :=
 	Cross[p,q]
-
-LineRep[l_] := 
-	Evaluate[Simplify[l.{x, y, 1} == 0]];
 
 LineDirection[l_] :=
 	If[l[[2]]==0,

@@ -4,7 +4,7 @@ BeginPackage["ComputerVision`LeastSquaresFitting`",{"ComputerVision`Utils`","Com
 
 FitConic::usage = "FitConic[points] fits a conic through at least 5 homogeneous points using linear minimization.";
 
-FitLine::usage = "FitLine gives a least squares fit of a line to a set of points. ";
+FitLine::usage = "FitLine[points] gives a least squares fit of a line to a set of points. ";
 
 Begin["`Private`"] (* Begin Private Context *) 
 
