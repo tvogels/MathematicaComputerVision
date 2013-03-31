@@ -8,7 +8,8 @@ BeginPackage["ComputerVision`",
 		"ComputerVision`Camera`",
 		"ComputerVision`ImageManipulation`",
 		"ComputerVision`LeastSquaresFitting`",
-		"ComputerVision`FileSystem`"
+		"ComputerVision`FileSystem`",
+		"ComputerVision`RANSAC`"
 	}]
 
 
