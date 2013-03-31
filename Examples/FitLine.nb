@@ -1,0 +1,154 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4488,        145]
+NotebookOptionsPosition[      3950,        122]
+NotebookOutlinePosition[      4307,        138]
+CellTagsIndexPosition[      4264,        135]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Fit a line", "Title",
+ CellChangeTimes->{{3.5737243815709667`*^9, 3.573724385791731*^9}}],
+
+Cell["Through a set of 2D points", "Subtitle",
+ CellChangeTimes->{{3.573724387063168*^9, 3.573724389359171*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "ComputerVision`LeastSquaresFitting`"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.573724395109981*^9, 3.5737244019349937`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pts", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       TagBox[GridBox[{
+          {"\[Piecewise]", GridBox[{
+             {"1", 
+              RowBox[{"OddQ", "[", "i", "]"}]},
+             {
+              RowBox[{"-", "1"}], 
+              RowBox[{"EvenQ", "[", "i", "]"}]}
+            },
+            AllowedDimensions->{2, Automatic},
+            Editable->True,
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{1.}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.84]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}},
+            Selectable->True]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+         GridBoxItemSize->{
+          "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{1.}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.35]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        "Piecewise",
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True,
+        Selectable->False], ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       RowBox[{"-", "1000"}], ",", "1000"}], "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"l", "=", 
+  RowBox[{"FitLine", "[", "pts", "]"}]}]], "Input",
+ CellChangeTimes->{3.573724442284502*^9}],
+
+Cell[BoxData[
+ RowBox[{"Abs", "[", 
+  RowBox[{
+   RowBox[{"pts", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], ".", "l"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ContourPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"l", ".", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "1"}], "}"}]}], "\[Equal]", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "3"}], ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", 
+       RowBox[{"-", "3"}], ",", "5"}], "}"}]}], "]"}], ",", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"Point", "/@", 
+     RowBox[{"Nc", "/@", "pts"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5737244545800467`*^9, 3.5737244658513403`*^9}, {
+  3.573724514882347*^9, 3.5737245223123093`*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 685},
+WindowMargins->{{350, Automatic}, {Automatic, 50}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 95, 1, 93, "Title"],
+Cell[677, 25, 112, 1, 52, "Subtitle"],
+Cell[792, 28, 174, 3, 28, "Input",
+ InitializationCell->True],
+Cell[969, 33, 2024, 54, 47, "Input"],
+Cell[2996, 89, 127, 3, 28, "Input"],
+Cell[3126, 94, 135, 4, 28, "Input"],
+Cell[3264, 100, 670, 19, 46, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

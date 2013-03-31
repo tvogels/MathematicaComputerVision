@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      3577,        118]
-NotebookOptionsPosition[      3074,         96]
-NotebookOutlinePosition[      3431,        112]
-CellTagsIndexPosition[      3388,        109]
+NotebookDataLength[      3634,        119]
+NotebookOptionsPosition[      3131,         97]
+NotebookOutlinePosition[      3488,        113]
+CellTagsIndexPosition[      3445,        110]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -35,10 +35,11 @@ Cell["Thijs Vogels - March 2013", "Subtitle",
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"<<", "ComputerVision`ConicFitting`"}], ";"}]], "Input",
+  RowBox[{"<<", "ComputerVision`LeastSquaresFitting`"}], ";"}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.5737237978532877`*^9, 3.573723810285778*^9}, {
-  3.573723846820998*^9, 3.573723849466425*^9}}],
+  3.573723846820998*^9, 3.573723849466425*^9}, {3.5737245584067383`*^9, 
+  3.57372456148577*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -115,10 +116,10 @@ Cell[CellGroupData[{
 Cell[579, 22, 72, 1, 93, "Title"],
 Cell[654, 25, 169, 5, 114, "Subtitle"],
 Cell[826, 32, 87, 1, 52, "Subtitle"],
-Cell[916, 35, 234, 5, 28, "Input",
+Cell[916, 35, 291, 6, 28, "Input",
  InitializationCell->True],
-Cell[1153, 42, 991, 24, 182, "Input"],
-Cell[2147, 68, 911, 25, 97, "Input"]
+Cell[1210, 43, 991, 24, 182, "Input"],
+Cell[2204, 69, 911, 25, 97, "Input"]
 }, Open  ]]
 }
 ]
