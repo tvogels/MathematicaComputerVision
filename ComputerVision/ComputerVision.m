@@ -6,7 +6,9 @@ BeginPackage["ComputerVision`",
 		"ComputerVision`Misc`",
 		"ComputerVision`Homographies`",
 		"ComputerVision`Camera`",
-		"ComputerVision`ImageManipulation`"
+		"ComputerVision`ImageManipulation`",
+		"ComputerVision`ConicFitting`",
+		"ComputerVision`FileSystem`"
 	}]
 
 
