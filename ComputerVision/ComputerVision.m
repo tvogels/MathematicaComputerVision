@@ -9,7 +9,8 @@ BeginPackage["ComputerVision`",
 		"ComputerVision`ImageManipulation`",
 		"ComputerVision`LeastSquaresFitting`",
 		"ComputerVision`FileSystem`",
-		"ComputerVision`RANSAC`"
+		"ComputerVision`RANSAC`",
+		"ComputerVision`CameraCalibration`"
 	}]
 
 

@@ -1,0 +1,416 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     12157,        407]
+NotebookOptionsPosition[      9925,        326]
+NotebookOutlinePosition[     10281,        342]
+CellTagsIndexPosition[     10238,        339]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Automatic Camera Calibration", "Title",
+ CellChangeTimes->{{3.5728913279620867`*^9, 3.5728913328498898`*^9}}],
+
+Cell["Thijs Vogels - March 2013", "Subtitle",
+ CellChangeTimes->{{3.572891385555438*^9, 3.5728913877252493`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "ComputerVision`"}]], "Input",
+ CellChangeTimes->{{3.5728913337777348`*^9, 3.572891338317844*^9}, {
+  3.572941722125822*^9, 3.572941725595636*^9}, {3.572943400190508*^9, 
+  3.572943403451399*^9}, {3.5740019649006033`*^9, 3.5740019667722387`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Load Images", "Section",
+ CellChangeTimes->{{3.572944530409012*^9, 3.572944535817815*^9}, {
+  3.573290155030468*^9, 3.573290156413624*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"imgs", "=", 
+   RowBox[{
+   "LoadImagesInDirectory", "[", 
+    "\"\</Users/thijs/UCR/IRP/Notebooks/assets/casio\>\"", "]"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5728913758343887`*^9, 3.5728913781957703`*^9}, {
+  3.5732900155981092`*^9, 3.5732900811000347`*^9}, {3.574001970860013*^9, 
+  3.574001982747941*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Calculate Squares", "Section",
+ CellChangeTimes->{{3.5732901591336412`*^9, 3.5732901619011393`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Locate them", "Subsection",
+ CellChangeTimes->{{3.573290591899394*^9, 3.573290593190399*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"squares", "=", 
+   RowBox[{"Parallelize", "[", 
+    RowBox[{"SeparateSquares", "/@", "imgs"}], "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.572944000556089*^9, 3.572944082183972*^9}, {
+  3.572944146419805*^9, 3.57294417564377*^9}, {3.57294450943955*^9, 
+  3.5729445166732893`*^9}, {3.573290099779828*^9, 3.573290124642558*^9}, {
+  3.574002048238112*^9, 3.574002050091424*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ImageAdd", "[", 
+    RowBox[{
+     RowBox[{"imgs", "[", 
+      RowBox[{"[", "ii", "]"}], "]"}], ",", 
+     RowBox[{"ImageAdjust", "[", 
+      RowBox[{
+       RowBox[{"ImageAdd", "[", 
+        RowBox[{
+         RowBox[{"ImageAdd", "[", 
+          RowBox[{
+           RowBox[{"squares", "[", 
+            RowBox[{"[", 
+             RowBox[{"ii", ",", "1"}], "]"}], "]"}], ",", 
+           RowBox[{"squares", "[", 
+            RowBox[{"[", 
+             RowBox[{"ii", ",", "2"}], "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"squares", "[", 
+          RowBox[{"[", 
+           RowBox[{"ii", ",", "3"}], "]"}], "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", ".7"}]}], "}"}]}], "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"ii", ",", "1", ",", 
+     RowBox[{"Length", "[", "imgs", "]"}], ",", "1"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.5732901641593943`*^9, 3.573290256787035*^9}, {
+  3.573290399020541*^9, 3.5732904258354893`*^9}, {3.5732904616412497`*^9, 
+  3.5732905177512712`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Make equations for them", "Subsection",
+ CellChangeTimes->{{3.573290596217031*^9, 3.573290598422247*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"corners", "=", 
+   RowBox[{"Parallelize", "[", 
+    RowBox[{"Map", "[", 
+     RowBox[{"CornersInQuadrangleImage", ",", "squares", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.573290625880856*^9, 3.5732906280141582`*^9}, {
+   3.573290671765409*^9, 3.5732907253877*^9}, 3.574002244744073*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Find the K-matrices for them", "Subsection",
+ CellChangeTimes->{{3.573290819829545*^9, 3.573290828890617*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Ks", "=", 
+   RowBox[{"Parallelize", "[", 
+    RowBox[{"CameraCalibrationFromImagedSquares", "/@", "corners"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"KsNoSkew", "=", 
+   RowBox[{"Parallelize", "[", 
+    RowBox[{
+    "CameraCalibrationFromImagedSquaresAssertingZeroSkew", "/@", "corners"}], 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.573290850396414*^9, 3.573290896020607*^9}, {
+  3.574002604148878*^9, 3.574002605826631*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Statistics", "Section",
+ CellChangeTimes->{{3.5732908779030113`*^9, 3.573290879000064*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Skew-components", "Subsection",
+ CellChangeTimes->{{3.573290907166325*^9, 3.57329091131924*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"skews", "=", 
+   RowBox[{"Ks", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "1", ",", "2"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.573290912688052*^9, 3.57329092561749*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "skews", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "skews", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.573290927472919*^9, 3.5732909292158947`*^9}, {
+  3.57329100351683*^9, 3.573291013764429*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Histogram", "[", 
+  RowBox[{"skews", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "20"}], ",", "20", ",", "4"}], "}"}], ",", "\"\<PDF\>\""}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.573290931090104*^9, 3.5732909774357777`*^9}, {
+  3.574004800896929*^9, 3.5740048102828608`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Scale parameters", "Subsection",
+ CellChangeTimes->{{3.573291122215117*^9, 3.573291136548566*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fxs", "=", 
+   RowBox[{"Ks", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.573291027949799*^9, 3.573291037980196*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "fxs", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "fxs", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.57329104551492*^9, 3.573291047116685*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["x", "Subsubsection",
+ CellChangeTimes->{{3.574004851866041*^9, 3.574004852861134*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Histogram", "[", 
+  RowBox[{"fxs", ",", "Automatic", ",", "\"\<PDF\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.573291061422248*^9, 3.57329106559591*^9}, {
+  3.574004829321452*^9, 3.57400483968829*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["y", "Subsubsection",
+ CellChangeTimes->{{3.5732911466298037`*^9, 3.573291147412602*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fys", "=", 
+   RowBox[{"Ks", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2", ",", "2"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.573291091303681*^9, 3.573291096904662*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "fys", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "fys", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.573291101743284*^9, 3.573291104767304*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Histogram", "[", 
+  RowBox[{"fys", ",", "Automatic", ",", "\"\<PDF\>\""}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.573291118270425*^9, {3.574004864039311*^9, 3.574004875149398*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["x/y", "Subsubsection",
+ CellChangeTimes->{{3.5732911497578382`*^9, 3.5732911515079813`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fxfy", "=", 
+   RowBox[{
+    RowBox[{"Ks", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}], "/", 
+    RowBox[{"Ks", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2", ",", "2"}], "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.573291154280937*^9, 3.573291168132309*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "fxfy", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "fxfy", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.5732911738773623`*^9, 3.5732911767679987`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Centres", "Subsubsection",
+ CellChangeTimes->{{3.573291244941111*^9, 3.573291245892477*^9}, 
+   3.573291408422216*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"centres", "=", 
+   RowBox[{"Ks", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2"}], "}"}], ",", "3"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.573291233758361*^9, 3.5732912716210957`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "centres", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "centres", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.573291291113851*^9, 3.573291306843329*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ImageDimensions", "[", 
+   RowBox[{"imgs", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "]"}], "/", "2"}]], "Input",
+ CellChangeTimes->{{3.573291360622341*^9, 3.57329139195706*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Histogram3D", "[", 
+  RowBox[{"centres", ",", "Automatic", ",", "\"\<PDF\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.573291274460574*^9, 3.573291277954053*^9}, {
+  3.57400489557296*^9, 3.57400489823969*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Overview", "Section",
+ CellChangeTimes->{{3.5732924640378857`*^9, 3.5732924724910517`*^9}, {
+  3.573292716958322*^9, 3.573292718024497*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Mean", "[", "Ks", "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.573292539150757*^9, 3.573292545181933*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Mean", "[", "KsNoSkew", "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.573292546551043*^9, 3.5732925549462013`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{740, 685},
+WindowMargins->{{Automatic, 69}, {Automatic, 42}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 115, 1, 93, "Title"],
+Cell[697, 25, 113, 1, 52, "Subtitle"],
+Cell[813, 28, 275, 4, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1113, 36, 145, 2, 81, "Section"],
+Cell[1261, 40, 380, 10, 28, "Input",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1678, 55, 106, 1, 81, "Section"],
+Cell[CellGroupData[{
+Cell[1809, 60, 99, 1, 45, "Subsection"],
+Cell[1911, 63, 441, 9, 28, "Input",
+ InitializationCell->True],
+Cell[2355, 74, 1140, 32, 80, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3532, 111, 111, 1, 45, "Subsection"],
+Cell[3646, 114, 374, 8, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4057, 127, 116, 1, 45, "Subsection"],
+Cell[4176, 130, 498, 13, 63, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4723, 149, 97, 1, 81, "Section"],
+Cell[CellGroupData[{
+Cell[4845, 154, 102, 1, 45, "Subsection"],
+Cell[4950, 157, 229, 6, 28, "Input"],
+Cell[5182, 165, 273, 6, 28, "Input"],
+Cell[5458, 173, 313, 8, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5808, 186, 104, 1, 45, "Subsection"],
+Cell[5915, 189, 228, 6, 28, "Input"],
+Cell[6146, 197, 218, 5, 28, "Input"],
+Cell[CellGroupData[{
+Cell[6389, 206, 92, 1, 36, "Subsubsection"],
+Cell[6484, 209, 228, 4, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6749, 218, 94, 1, 36, "Subsubsection"],
+Cell[6846, 221, 228, 6, 28, "Input"],
+Cell[7077, 229, 219, 5, 28, "Input"],
+Cell[7299, 236, 206, 4, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7542, 245, 98, 1, 36, "Subsubsection"],
+Cell[7643, 248, 352, 10, 28, "Input"],
+Cell[7998, 260, 225, 5, 28, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8260, 270, 124, 2, 36, "Subsubsection"],
+Cell[8387, 274, 292, 9, 28, "Input"],
+Cell[8682, 285, 227, 5, 28, "Input"],
+Cell[8912, 292, 213, 5, 28, "Input"],
+Cell[9128, 299, 234, 4, 28, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9423, 310, 146, 2, 81, "Section"],
+Cell[9572, 314, 157, 3, 28, "Input"],
+Cell[9732, 319, 165, 3, 28, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
