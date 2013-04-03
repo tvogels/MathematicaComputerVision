@@ -4,6 +4,8 @@ BeginPackage["ComputerVision`FundamentalMatrix`",{"ComputerVision`Homographies`"
 
 FFromCorrespondences::usage = "FFromCorrespondences[corr] gives a fundamental from a list of point correspondences using a DLT algorithm.";
 
+EFromFK::usage = "EFromFK[F,K] gives the essential matrix from the fundamental matrix and a calibration matrix."
+
 Begin["`Private`"] (* Begin Private Context *) 
 
 FFromCorrespondences[corr_] :=
@@ -33,6 +35,9 @@ FFromCorrespondences[corr_] :=
 		(* Denormalization *)
 		Transpose[T2].F.T1
 	];
+
+EFromFK[F_,K_] :=
+	Transpose[K].F.K;
 
 End[] (* End Private Context *)
 
