@@ -91,6 +91,41 @@ Returns the normalized set of points <b>and</b> the transformation that transfor
 	</tr>
 </table>
 
+### Camera Calibration
+Based on images of three black squares on a contrasting background.
+<table>
+	<tr>
+		<td><code>SeparateSquares[img,nsquares]</code></td>
+		<td>takes an image of n black squares (on a constrasting background) and returns n white images of those squares on a black background.
+	It defaults to 3 squares.</td>
+	</tr>
+	<tr>
+		<td><code>CornerInQuadrangleImage[square]</code></td>
+		<td>calculates the four corner points in an image of a quadrangle by first finding the edges and intersecting those.
+	Returns the points in non-homogeneous coordinates.</td>
+	</tr>
+	<tr>
+		<td><code>CameraCalibrationFromImagedSquares[squares]</code></td>
+		<td>returns the internal camera parameters K from the (non-homogeneous) corner points of (at least) three imaged squares. It identifies the image of the absolute conic, and uses a Cholesky decomposition to derive K from omega.</td>
+	</tr>
+	<tr>
+		<td><code>CameraCalibrationFromImagedSquaresAssertingZeroSkew[squares]</code></td>
+		<td>returns the internal camera parameters K from the (non-homogeneous) corner points of (at least) three imaged squares. It identifies the image of the absolute conic, and uses a Cholesky decomposition to derive K from omega. It asserts zero skew.</td>
+	</tr>
+</table>
+
+### Fundamental Matrix
+<table>
+	<tr>
+		<td><code>FFromCorrespondences[corr]</code></td>
+		<td>gives a fundamental from a list of point correspondences using a DLT algorithm.</td>
+	</tr>
+	<tr>
+		<td><code>EFromFK[F,K]</code></td>
+		<td>gives the essential matrix corresponding to a fundamental matrix F and a calibration matrix K.</td>
+	</tr>
+</table>
+
 ### Image Manipulation
 <table>
 	<tr>

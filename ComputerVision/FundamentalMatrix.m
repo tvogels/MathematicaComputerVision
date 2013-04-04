@@ -2,7 +2,7 @@
 
 BeginPackage["ComputerVision`FundamentalMatrix`",{"ComputerVision`Homographies`"}]
 
-FFromCorrespondences::usage = "FFromCorrespondences[corr] gives a fundamental from a list of point correspondences using a DLT algorithm.";
+FFromCorrespondences::usage = "FFromCorrespondences[corr] gives a fundamental from a list of (non-homogeneous) point correspondences using a DLT algorithm.";
 
 EFromFK::usage = "EFromFK[F,K] gives the essential matrix from the fundamental matrix and a calibration matrix."
 
