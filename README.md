@@ -124,6 +124,18 @@ Based on images of three black squares on a contrasting background.
 		<td><code>EFromFK[F,K]</code></td>
 		<td>gives the essential matrix corresponding to a fundamental matrix F and a calibration matrix K.</td>
 	</tr>
+	<tr>
+		<td><code>DecomposeE[E]</code></td>
+		<td>returns four possible second camera matrices that form a couple with [I|0] based on an essential matrix E.</td>
+	</tr>
+</table>
+
+### Scene Reconstruction
+<table>
+	<tr>
+		<td><code>Triangulate[corr,P1,P2]</code></td>
+		<td>gives a DLT-estimate of the 3D-location of corresponding image point correlations in two images and the two camera matrices.</td>
+	</tr>
 </table>
 
 ### Image Manipulation

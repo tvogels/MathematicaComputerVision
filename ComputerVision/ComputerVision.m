@@ -11,9 +11,9 @@ BeginPackage["ComputerVision`",
 		"ComputerVision`FileSystem`",
 		"ComputerVision`RANSAC`",
 		"ComputerVision`CameraCalibration`",
-		"ComputerVision`FundamentalMatrix`"
+		"ComputerVision`FundamentalMatrix`",
+		"ComputerVision`SceneReconstruction`"
 	}]
-
 
 Begin["`Private`"]
 

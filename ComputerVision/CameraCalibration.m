@@ -13,7 +13,7 @@ CornersInQuadrangleImage::usage = "CornerInQuadrangleImage[square] calculates th
 
 CameraCalibrationFromImagedSquares::usage = "CameraCalibrationFromImagedSquares[squares] returns the internal camera parameters K from the (non-homogeneous) corner points of (at least) three imaged squares. It identifies the image of the absolute conic, and uses a Cholesky decomposition to derive K from omega.";
 
-CameraCalibrationFromImagedSquaresAssertingZeroSkew::usage = "cameraCalibrationFromImagedSquaresAssertingZeroSkew[squares] returns the internal camera parameters K from the (non-homogeneous) corner points of (at least) three imaged squares. It identifies the image of the absolute conic, and uses a Cholesky decomposition to derive K from omega. It asserts zero skew.";
+CameraCalibrationFromImagedSquaresAssertingZeroSkew::usage = "CameraCalibrationFromImagedSquaresAssertingZeroSkew[squares] returns the internal camera parameters K from the (non-homogeneous) corner points of (at least) three imaged squares. It identifies the image of the absolute conic, and uses a Cholesky decomposition to derive K from omega. It asserts zero skew.";
 
 Begin["`Private`"] (* Begin Private Context *) 
 
