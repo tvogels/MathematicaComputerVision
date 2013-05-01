@@ -34,11 +34,11 @@ CameraMatrixFromCorrespondences[corr_] :=
 	];
 
 CameraDecompose[P_] :=
-	Module[{H,K,R,t,D},
+	Module[{M,K,R,t,D},
 		(* Define H as the first three columns of P. *)
-		H = P[[All,Range[1,3]]];
+		M = P[[All,1;;3]];
 		(* K and R follow from an RQ decomposition. *)
-		{K,R} = RQ[H];
+		{K,R} = RQ[M];
 		(* Make sure K[[3,3]] is 1. *)
 		K = K/K[[3,3]];
 		(* Make sure the f-components of K are positive, if not,
@@ -76,7 +76,7 @@ DrawCamera[P_,s_,img_] :=
 			{w,h} = ImageDimensions[img]
 		];
 		(* The determinant of M is used to determine axis direction *)
-		det = Det[P[[All,Range[1,3]]]];
+		det = Det[P[[All,1;;3]]];
 		(* Define the points and transform them. *)
 		pts = size {
 			{0, 0, 0},
